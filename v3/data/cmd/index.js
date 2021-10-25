@@ -453,11 +453,7 @@ document.addEventListener('click', async e => {
     });
 
     let inserted = false;
-    // insert StringFields
-    if (checked.stringFields) {
-      const r = await insert.fields(checked.stringFields);
-      inserted = inserted || r.reduce((p, c) => p || c.result, false);
-    }
+    
     // insert username
     if (cmd === 'insert-login' || cmd === 'insert-both') {
       const r = await insert.username(list.value);
@@ -468,6 +464,12 @@ document.addEventListener('click', async e => {
       const r = await insert.password(checked.dataset.password);
       inserted = inserted || r.reduce((p, c) => p || c.result, false);
     }
+    // insert StringFields
+    if (checked.stringFields) {
+      const r = await insert.fields(checked.stringFields);
+      inserted = inserted || r.reduce((p, c) => p || c.result, false);
+    }
+    
     if (inserted !== true) {
       // do we have a CORS frame
       const r = await chrome.scripting.executeScript({
