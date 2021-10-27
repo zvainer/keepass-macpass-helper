@@ -272,7 +272,7 @@ insert.fields = async stringFields => {
             custom.focus();
             document.execCommand('selectAll', false, '');
             const v = document.execCommand('insertText', false, o.Value);
-            if (!v) {
+            if (!v || custom.value !== o.value) {
               try {
                 custom.value = o.Value;
               }
